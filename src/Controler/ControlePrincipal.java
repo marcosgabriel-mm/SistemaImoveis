@@ -21,13 +21,10 @@ import View.LimiteCadImovel;
 import View.LimiteCadVendedor;
 import View.LimiteConPropostas;
 import View.LimitePrincipal;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,17 +33,16 @@ import javax.swing.JOptionPane;
  */
 public class ControlePrincipal {
     
-    //limite principal
-    private LimitePrincipal limPrincipal;
-    
     //controladores
     private ControleComprador ctrComprador;
     private ControleVendedor ctrVendedor;
     private ControleImovel ctrImovel;
     private ControleCorretor ctrCorretor;
+
+    final int MessageType = 0;
     
     public ControlePrincipal(){
-        limPrincipal = new LimitePrincipal(this);
+        new LimitePrincipal(this);
         
         ctrComprador = new ControleComprador();
         ctrVendedor = new ControleVendedor();
@@ -141,7 +137,7 @@ public class ControlePrincipal {
             Vendedor vendedorImovel = ctrVendedor.retornaVendedorPorCpf(cpfVendedor);
             ctrImovel.cadastraImovel(codigo, tipo, descricao, endereco, foto, preco, comissao, vendedorImovel);
         }else{
-            JOptionPane.showMessageDialog(null, "Não existe o vendedor com o CPF especificado!", "Erro", 0);
+            JOptionPane.showMessageDialog(null, "Não existe o vendedor com o CPF especificado!", "Erro", MessageType);
             System.out.println("Não existe o vendedor com o CPF especificado.");
         }
     }

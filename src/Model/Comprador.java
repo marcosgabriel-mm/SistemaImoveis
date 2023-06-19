@@ -8,8 +8,7 @@ public class Comprador extends Pessoa implements Serializable{
     private String contatoPref;
     private ArrayList<String> listaTipoImovelCompra;
 
-    public Comprador(String cpf, String nome, String email, String fone,
-            String contatoPref) {
+    public Comprador(String cpf, String nome, String email, String fone, String contatoPref) {
         super(cpf, nome, email, fone);
         this.contatoPref = contatoPref;
     }

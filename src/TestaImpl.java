@@ -6,7 +6,7 @@ import java.util.*;
 public class TestaImpl {
 
     public static void main(String[] args) {
-        /*
+        
         ArrayList<Imovel> listaImoveis = new ArrayList();
         
         // Criando vendedores, compradores e corretores        
@@ -112,7 +112,7 @@ public class TestaImpl {
             }
 
         }
-        */
+        
         //cria o controlador principal
         new ControlePrincipal();
     }

@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -20,6 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class ControleComprador{
     private ArrayList<Comprador> listaComprador = new ArrayList<Comprador>();
+    final int MessageType = 1;
     
     public ControleComprador(){
         desserializaComprador();
@@ -30,7 +30,7 @@ public class ControleComprador{
         Comprador novoComprador = new Comprador(cpf, nome, email,fone,contatoPref);
         listaComprador.add(novoComprador);
         System.out.println("Cadastrado Comprador!");
-        JOptionPane.showMessageDialog(null, "Comprador cadastrado!", "Sucesso", 1);
+        JOptionPane.showMessageDialog(null, "Comprador cadastrado!", "Sucesso", MessageType);
     }
 
     public Comprador retornaCompradorPorCpf(String cpf) {

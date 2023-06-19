@@ -17,7 +17,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -35,6 +34,7 @@ public class ControleImovel {
     private ArrayList<Imovel> listaImovelProposta = new ArrayList<Imovel>();
     private ArrayList<Imovel> listaImovelVendido = new ArrayList<Imovel>();
     private List<String> tiposImovel = new ArrayList<String>();
+    final int MessageType = 1;
     
     public ControleImovel(){
         desserializaImovel();
@@ -51,7 +51,7 @@ public class ControleImovel {
         Imovel novoImovel = new Imovel(codigo, tipo, endereco,descricao,foto,preco,comissao, Calendar.getInstance(),vendedorImovel);
         listaImovel.add(novoImovel);
         System.out.println("Cadastrado Imovel!");
-        JOptionPane.showMessageDialog(null, "Imóvel cadastrado!", "Sucesso", 1);
+        JOptionPane.showMessageDialog(null, "Imóvel cadastrado!", "Sucesso", MessageType);
         if(tipo.equals(Util.LOTE)){
             listaImovelLote.add(novoImovel);
         }else if(tipo.equals(Util.CASA)){

@@ -21,6 +21,8 @@ import javax.swing.JOptionPane;
 public class ControleVendedor implements Serializable{
     private ArrayList<Vendedor> listaVendedor = new ArrayList<Vendedor>();
     
+    final int MessageType = 1;
+    
     public ControleVendedor(){
         desserializaVendedor();
     }
@@ -30,7 +32,7 @@ public class ControleVendedor implements Serializable{
         Vendedor novoVendedor = new Vendedor(cpf, nome, email,fone,contatoPref);
         listaVendedor.add(novoVendedor);
         System.out.println("Cadastrado Vendedor!");
-        JOptionPane.showMessageDialog(null, "Vendedor cadastrado!", "Sucesso", 1);
+        JOptionPane.showMessageDialog(null, "Vendedor cadastrado!", "Sucesso", MessageType);
     }
     
     public boolean existeVendedor(String cpf){

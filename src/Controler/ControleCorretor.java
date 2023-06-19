@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class ControleCorretor {
     private ArrayList<Corretor> listaCorretor = new ArrayList<Corretor>();
+    final int MessageType = 1;
     
     public ControleCorretor(){
         desserializaCorretor();
@@ -30,7 +31,7 @@ public class ControleCorretor {
         Corretor novoCorretor = new Corretor(cpf, nome, email,fone,creci,percCorretagem);
         listaCorretor.add(novoCorretor);
         System.out.println("Cadastrado Corretor!");
-        JOptionPane.showMessageDialog(null, "Corretor cadastrado!", "Sucesso", 1);
+        JOptionPane.showMessageDialog(null, "Corretor cadastrado!", "Sucesso", MessageType);
     }
     
     public Corretor retornaCorretorPorCpf(String cpf) {
