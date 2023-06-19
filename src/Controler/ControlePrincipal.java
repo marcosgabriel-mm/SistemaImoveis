@@ -53,9 +53,31 @@ public class ControlePrincipal {
     }
     
     public void carregaDados(){
+        final int PercentagemCorretagem1 = 50;
+        final int PercentagemCorretagem2 = 40;
+
+        final int Ano = 2019;
+        final int Mes = 12;
+        final int Dia = 05;
+
+        final int Codigo1 = 101;
+        final int Codigo2 = 102;
+        final int Codigo3 = 103;
+        final int Codigo4 = 104;
+
+        final int Preco1 = 700000;
+        final int Preco2 = 1200000;
+        final int Preco3 = 400000;
+        final int Preco4 = 300000;
+
+        final int Comissao1 = 5;
+        final int Comissao2 = 4;
+        final int Comissao3 = 5;
+        final int Comissao4 = 4;
+
         //Adiciona Corretores
-        ctrCorretor.cadastraCorretor("1001", "Joao Santos", "joao@gmail.com", "999990001", "10001", 50);
-        ctrCorretor.cadastraCorretor("1002", "Luiz Souza", "luiz@gmail.com", "999990002", "10002", 40);
+        ctrCorretor.cadastraCorretor("1001", "Joao Santos", "joao@gmail.com", "999990001", "10001", PercentagemCorretagem1);
+        ctrCorretor.cadastraCorretor("1002", "Luiz Souza", "luiz@gmail.com", "999990002", "10002", PercentagemCorretagem2);
         
         //Adiciona Vendedores 
         ctrVendedor.cadastraVendedor("2001", "Marina Cintra", "marina@gmail.com", "888880001", Util.FONE);
@@ -71,21 +93,21 @@ public class ControlePrincipal {
         Calendar data = GregorianCalendar.getInstance();
         
         //Adiciona Imovel
-        data.set(GregorianCalendar.YEAR, 2019);
-        data.set(GregorianCalendar.MONTH, 12);
-        data.set(GregorianCalendar.DAY_OF_MONTH, 05);
+        data.set(GregorianCalendar.YEAR, Ano);
+        data.set(GregorianCalendar.MONTH, Mes);
+        data.set(GregorianCalendar.DAY_OF_MONTH, Dia);
         
         Vendedor vend = retornaVendedorPorCpf("2001");
-        ctrImovel.cadastraImovel(101, Util.CASA, "Casa 3 quartos", "Endereco","..\\images\\casa-101.jpg", 700000, 5, data, vend);
+        ctrImovel.cadastraImovel(Codigo1, Util.CASA, "Casa 3 quartos", "Endereco","..\\images\\casa-101.jpg", Preco1, Comissao1, data, vend);
         
         vend = retornaVendedorPorCpf("2002");
-        ctrImovel.cadastraImovel(102, Util.CASA, "Casa alto padrao", "Endereco2","..\\images\\casa-102.jpg", 1200000, 4, data, vend);
+        ctrImovel.cadastraImovel(Codigo2, Util.CASA, "Casa alto padrao", "Endereco2","..\\images\\casa-102.jpg", Preco2, Comissao2, data, vend);
         
         vend = retornaVendedorPorCpf("2003");
-        ctrImovel.cadastraImovel(103, Util.APTO, "Apto 3 quartos", "Endereco3","..\\images\\apto-103.jpg", 400000, 5, data, vend);
+        ctrImovel.cadastraImovel(Codigo3, Util.APTO, "Apto 3 quartos", "Endereco3","..\\images\\apto-103.jpg", Preco3, Comissao3, data, vend);
         
         vend = retornaVendedorPorCpf("2001");
-        ctrImovel.cadastraImovel(104, Util.APTO, "Apto 2 quartos", "Endereco4","..\\images\\apto-104.jpg", 300000, 4, data, vend);
+        ctrImovel.cadastraImovel(Codigo4, Util.APTO, "Apto 2 quartos", "Endereco4","..\\images\\apto-104.jpg", Preco4, Comissao4, data, vend);
     }
     
     //Interfaces cadastro
