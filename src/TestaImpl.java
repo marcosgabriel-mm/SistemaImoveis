@@ -6,6 +6,24 @@ import java.util.*;
 public class TestaImpl {
 
     public static void main(String[] args) {
+
+        final int preco1 = 500000;
+        final int preco2 = 350000;
+        final int preco3 = 200000;
+
+        final int comissao1 = 5;
+        final int comissao2 = 4;
+        final int comissao3 = 5;
+
+        final int percentagem1 = 50;
+        final int percentagem2 = 40;
+
+        final int codigo1 = 101;
+        final int codigo2 = 102;
+        final int codigo3 = 103;
+
+        final int valor1 = 320000;
+        final int valor2 = 330000;
         
         ArrayList<Imovel> listaImoveis = new ArrayList();
         
@@ -21,15 +39,15 @@ public class TestaImpl {
                 "66665555", Util.FONE);
 
         Corretor cor1 = new Corretor("555666", "Ana Cintra", "ana@gmail.com",
-                "55554444", "123456", 50);
+                "55554444", "123456", percentagem1);
         Corretor cor2 = new Corretor("666777", "Mario Prieto", "mario@gmail.com",
-                "44443333", "654321", 40);
+                "44443333", "654321", percentagem2);
 
-        Imovel casa = new Imovel(101, Util.CASA, "casa 3 dormitorios","ENDERECO1", "", 500000, 5,
+        Imovel casa = new Imovel(codigo1, Util.CASA, "casa 3 dormitorios","ENDERECO1", "", preco1, comissao1,
                 Calendar.getInstance(), v1);
-        Imovel apto = new Imovel(102, Util.APTO, "apto 2 dormitorios", "ENDERECO2","", 350000, 4,
+        Imovel apto = new Imovel(codigo2, Util.APTO, "apto 2 dormitorios", "ENDERECO2","", preco2, comissao2,
                 Calendar.getInstance(), v2);
-        Imovel lote = new Imovel(103, Util.LOTE, "lote 300 mts", "ENDERECO3","", 200000, 5,
+        Imovel lote = new Imovel(codigo3, Util.LOTE, "lote 300 mts", "ENDERECO3","", preco3, comissao3,
                 Calendar.getInstance(), v1);
 
         //Criando visitas
@@ -54,8 +72,8 @@ public class TestaImpl {
         lote.realizaVisita(vis5);
 
         //Criando e registrando propostas
-        Proposta prop1 = new Proposta(Calendar.getInstance(), c1, cor1, 320000);
-        Proposta prop2 = new Proposta(Calendar.getInstance(), c2, cor1, 330000);
+        Proposta prop1 = new Proposta(Calendar.getInstance(), c1, cor1, valor1);
+        Proposta prop2 = new Proposta(Calendar.getInstance(), c2, cor1, valor2);
 
         apto.registraProposta(prop1);
         apto.registraProposta(prop2);
