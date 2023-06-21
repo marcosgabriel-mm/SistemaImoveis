@@ -27,17 +27,29 @@ public class LimiteCadImovel extends JFrame implements ActionListener{
     private JLabel labelCodigo, labelTipo, labelDescricao, labelEndereco, labelFoto, labelPreco, labelComissao, labelVendedor;
     private JTextField textCodigo, textTipo, textDescricao, textEndereco, textFoto, textPreco, textComissao, textVendedor;
     private JButton buttonCadastrar;
+
+    static final int rowsValue1 = 0;
+    static final int rowsValue2 = 1;
+    static final int colsValue1 = 1;
+    static final int colsValue2 = 2;
+
+    static final int columns1 = 10;
+    static final int columns2 = 2;
+    static final int columns3 = 5;
+
+    static final int width = 600;
+    static final int height = 400;
     
     public LimiteCadImovel(ControlePrincipal controle){
         ctrPrincipal = controle;
         
         //Criação dos paineis
         painelPrincipal = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        painelSecundario = new JPanel(new GridLayout(0,1));
-        pCodigoTipo = new JPanel(new GridLayout(1,2));
-        pDescricaoEndereco = new JPanel(new GridLayout(1,2));
-        pFotoPreco = new JPanel(new GridLayout(1,2));
-        pComissaoVendedor = new JPanel(new GridLayout(1,2));
+        painelSecundario = new JPanel(new GridLayout(rowsValue1,colsValue1));
+        pCodigoTipo = new JPanel(new GridLayout(rowsValue2,colsValue2));
+        pDescricaoEndereco = new JPanel(new GridLayout(rowsValue2,colsValue2));
+        pFotoPreco = new JPanel(new GridLayout(rowsValue2,colsValue2));
+        pComissaoVendedor = new JPanel(new GridLayout(rowsValue2,colsValue2));
         pButtonCadastrar = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         //Criação dos labels
@@ -51,14 +63,14 @@ public class LimiteCadImovel extends JFrame implements ActionListener{
         labelVendedor = new JLabel("   Cpf-Vendedor");
         
         //Criação dos TextFields
-        textCodigo = new JTextField(10);
-        textTipo = new JTextField(10);
-        textDescricao = new JTextField(10);
-        textEndereco = new JTextField(10);
-        textFoto = new JTextField(2);
-        textPreco = new JTextField(5);
-        textComissao = new JTextField(5);
-        textVendedor = new JTextField(10);
+        textCodigo = new JTextField(columns1);
+        textTipo = new JTextField(columns1);
+        textDescricao = new JTextField(columns1);
+        textEndereco = new JTextField(columns1);
+        textFoto = new JTextField(columns2);
+        textPreco = new JTextField(columns3);
+        textComissao = new JTextField(columns3);
+        textVendedor = new JTextField(columns1);
         
         //Criação do Botão
         buttonCadastrar = new JButton("Cadastrar");
@@ -97,7 +109,7 @@ public class LimiteCadImovel extends JFrame implements ActionListener{
         super.add(painelPrincipal);
         
         super.setTitle("Cadastra Imovel");
-        super.setSize(600, 400);
+        super.setSize(width, height);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
