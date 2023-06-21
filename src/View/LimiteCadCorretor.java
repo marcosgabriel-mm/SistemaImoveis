@@ -29,16 +29,27 @@ public class LimiteCadCorretor extends JFrame implements ActionListener{
     private JLabel labelNome, labelCpf, labelEmail, labelFone, labelComissao, labelCreci;
     private JTextField textNome, textCpf, textEmail, textFone, textComissao, textCreci;
     private JButton buttonCadastrar;
+
+    static final int rowsValue1 = 0;
+    static final int rowsValue2 = 1;
+    static final int colsValue1 = 1;
+    static final int colsValue2 = 2;
+
+    static final int columns1 = 10;
+    static final int columns2 = 2;
+
+    static final int width = 600;
+    static final int height = 400;
     
     public LimiteCadCorretor(ControlePrincipal controle){
         ctrPrincipal = controle;
         
         //Criação dos paineis
         painelPrincipal = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        painelSecundario = new JPanel(new GridLayout(0,1));
-        pNomeCpf = new JPanel(new GridLayout(1,2));
-        pEmailFone = new JPanel(new GridLayout(1,2));
-        pComissaoCreci = new JPanel(new GridLayout(1,2));
+        painelSecundario = new JPanel(new GridLayout(rowsValue1,colsValue1));
+        pNomeCpf = new JPanel(new GridLayout(rowsValue2,colsValue2));
+        pEmailFone = new JPanel(new GridLayout(rowsValue2,colsValue2));
+        pComissaoCreci = new JPanel(new GridLayout(rowsValue2,colsValue2));
         pButtonCadastrar = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         //Criação dos labels
@@ -50,12 +61,12 @@ public class LimiteCadCorretor extends JFrame implements ActionListener{
         labelCreci = new JLabel("   Creci");
         
         //Criação dos TextFields
-        textNome = new JTextField(10);
-        textCpf = new JTextField(10);
-        textEmail = new JTextField(10);
-        textFone = new JTextField(10);
-        textComissao = new JTextField(2);
-        textCreci = new JTextField(10);
+        textNome = new JTextField(columns1);
+        textCpf = new JTextField(columns1);
+        textEmail = new JTextField(columns1);
+        textFone = new JTextField(columns1);
+        textComissao = new JTextField(columns2);
+        textCreci = new JTextField(columns1);
         
         //Criação do Botão
         buttonCadastrar = new JButton("Cadastrar");
@@ -88,7 +99,7 @@ public class LimiteCadCorretor extends JFrame implements ActionListener{
         super.add(painelPrincipal);
         
         super.setTitle("Cadastra Corretor");
-        super.setSize(600, 400);
+        super.setSize(width, height);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
