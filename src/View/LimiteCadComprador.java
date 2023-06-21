@@ -26,16 +26,26 @@ public class LimiteCadComprador extends JFrame implements ActionListener{
     private JLabel labelNome, labelCpf, labelEmail, labelFone, labelContatoPreferencial, labelAuxiliar;
     private JTextField textNome, textCpf, textEmail, textFone, textContatoPreferencial;
     private JButton buttonCadastrar;
+
+    static final int rowsValue1 = 0;
+    static final int rowsValue2 = 1;
+    static final int colsValue1 = 1;
+    static final int colsValue2 = 2;
+
+    static final int columns = 10;
+
+    static final int width = 600;
+    static final int height = 400;
     
     public LimiteCadComprador(ControlePrincipal controle){
         ctrPrincipal = controle;
         
         //Criação dos paineis
         painelPrincipal = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        painelSecundario = new JPanel(new GridLayout(0,1));
-        pNomeCpf = new JPanel(new GridLayout(1,2));
-        pEmailFone = new JPanel(new GridLayout(1,2));
-        pContatoBut = new JPanel(new GridLayout(1,2));
+        painelSecundario = new JPanel(new GridLayout(rowsValue1,colsValue1));
+        pNomeCpf = new JPanel(new GridLayout(rowsValue2,colsValue2));
+        pEmailFone = new JPanel(new GridLayout(rowsValue2,colsValue2));
+        pContatoBut = new JPanel(new GridLayout(rowsValue2,colsValue2));
         
         //Criação dos labels
         labelNome = new JLabel("Nome");
@@ -46,11 +56,11 @@ public class LimiteCadComprador extends JFrame implements ActionListener{
         labelAuxiliar = new JLabel("");
         
         //Criação dos TextFields
-        textNome = new JTextField(10);
-        textCpf = new JTextField(10);
-        textEmail = new JTextField(10);
-        textFone = new JTextField(10);
-        textContatoPreferencial = new JTextField(10);
+        textNome = new JTextField(columns);
+        textCpf = new JTextField(columns);
+        textEmail = new JTextField(columns);
+        textFone = new JTextField(columns);
+        textContatoPreferencial = new JTextField(columns);
         
         //Criação do Botão
         buttonCadastrar = new JButton("Cadastrar");
@@ -80,7 +90,7 @@ public class LimiteCadComprador extends JFrame implements ActionListener{
         super.add(painelPrincipal);
         
         super.setTitle("Cadastra Comprador");
-        super.setSize(600, 400);
+        super.setSize(width, height);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
