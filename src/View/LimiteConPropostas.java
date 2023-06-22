@@ -35,15 +35,102 @@ public class LimiteConPropostas extends JFrame implements ActionListener{
     private String flagJanela = "", flagJanelaHist = "", flagJanela2="", flagJanela2Hist="";
     private Imovel imovelEscolhido = null;
     private Proposta propostaEscolhida = null;
+
+    private void CriarPainel(){
+        painelPrincipal = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        painelSecundario = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        pEscolhaTipoImovel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        pListaTipo = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    }
+
+    private void InformacoesPainel(){
+        pEscolhaTipoImovel.add(listImoveis);
+        pListaTipo.add(listPropostas);
+        
+        painelSecundario.add(pEscolhaTipoImovel);
+        painelSecundario.add(pListaTipo);
+        
+        painelPrincipal.add(painelSecundario);
+        
+        super.add(painelPrincipal);
+        
+        super.setTitle("Propostas");
+        super.setSize(700, 400);
+        super.setAlwaysOnTop(true);
+        super.setResizable(false);
+        super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        super.setVisible(true);
+    }
+
+    private void tratarSelecaoImovel() {
+        int indexEscolhido = listImoveis.getSelectedIndex();
+        if (indexEscolhido <= 0) {
+            System.out.println("Nenhum item selecionado");
+        } else {
+            String escolhido = listImoveis.getSelectedValue().toString();
+            flagJanela = escolhido;
+            Imovel auxiliarEscolhido = null;
+            for (Imovel im : listaImoveisComProposta) {
+                String str = im.getCodigo() + " - " + im.getDescricao();
+                if (str.equals(escolhido)) {
+                    auxiliarEscolhido = im;
+                    imovelEscolhido = auxiliarEscolhido;
+                    break;
+                }
+            }
+            if (!flagJanela.equals(flagJanelaHist)) {
+                flagJanelaHist = flagJanela;
+                // settar valores na outra jlist e mostrar ela
+
+                listaPropostas.clear();
+                // seleciona o movel do arraylist moveis escolhido
+
+                listaPropostas.add("");
+                for (Proposta prop : auxiliarEscolhido.getListaPropostas()) {
+                    System.out.println("PRECO: " + prop.getValor());
+                    if (prop.getEstado().equals(Util.SUBMEDITA)) {
+                        listaPropostas.add("Comprador: " + prop.getComprador().getNome() + " - R$" + prop.getValor());
+                    }
+                }
+                listPropostas.setListData(listaPropostas.toArray());
+                listPropostas.setVisible(true);
+            } else {
+                System.out.println("Já foi aberto uma janela.");
+            }
+        }
+    }
+
+    private void tratarSelecaoProposta() {
+        int indexEscolhido = listPropostas.getSelectedIndex();
+        if (indexEscolhido <= 0) {
+            System.out.println("Nenhum item selecionado");
+        } else {
+            String escolhido = listPropostas.getSelectedValue().toString();
+            flagJanela2 = escolhido;
+            String strAux = "";
+            boolean flagProposta = false;
+            for (Proposta prop : imovelEscolhido.getListaPropostas()) {
+                strAux = "Comprador: " + prop.getComprador().getNome() + " - R$" + prop.getValor();
+                if (strAux.equals(escolhido)) {
+                    propostaEscolhida = prop;
+                    flagProposta = true;
+                    break;
+                }
+            }
+            if (!flagJanela2.equals(flagJanela2Hist) && flagProposta) {
+                flagJanela2Hist = flagJanela2;
+                new LimiteEscolhaProposta(ctrPrincipal, imovelEscolhido, propostaEscolhida);
+            } else {
+                System.out.println("Já foi aberto uma janela ou erro na proposta selecionada.");
+            }
+        }
+    }
     
     public LimiteConPropostas(ControlePrincipal controle){
         ctrPrincipal = controle;
         
         //Criação dos paineis
-        painelPrincipal = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        painelSecundario = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        pEscolhaTipoImovel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        pListaTipo = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        CriarPainel();
         
         //Preenche a lista com todos os imoveis
         listImoveis = new JList();
@@ -70,47 +157,13 @@ public class LimiteConPropostas extends JFrame implements ActionListener{
                 }
             }
         }
+        
         listImoveis.setListData(listaImoveis.toArray());
         
         listImoveis.addListSelectionListener(new ListSelectionListener(){
             @Override
             public void valueChanged(ListSelectionEvent lse) {
-                int indexEscolhido = listImoveis.getSelectedIndex();
-                if(indexEscolhido<=0){
-                    System.out.println("Nenhum item selecionado");
-                }else{
-                    String escolhido = listImoveis.getSelectedValue().toString(); 
-                    flagJanela = escolhido;
-                    Imovel auxiliarEscolhido = null;
-                    for(Imovel im: listaImoveisComProposta){
-                        String str = im.getCodigo()+ " - "+ im.getDescricao();
-                        if(str.equals(escolhido)){
-                            auxiliarEscolhido=im;
-                            imovelEscolhido = auxiliarEscolhido;
-                            break;
-                        }
-                    }
-                    if(!flagJanela.equals(flagJanelaHist)){
-                        flagJanelaHist=flagJanela;
-                        //settar valores na outra jlist e mostrar ela
-        
-                        listaPropostas.clear();
-                        //seleciona o movel do arraylist moveis escolhido
-
-                        listaPropostas.add("");
-                        for(Proposta prop: auxiliarEscolhido.getListaPropostas()){
-                            System.out.println("PRECO: "+ prop.getValor());
-                            if(prop.getEstado().equals(Util.SUBMEDITA)){
-                                
-                                listaPropostas.add("Comprador: " + prop.getComprador().getNome()+" - R$" + prop.getValor());
-                            }
-                        }
-                        listPropostas.setListData(listaPropostas.toArray());
-                        listPropostas.setVisible(true);
-                    }else{
-                        System.out.println("Já foi aberto uma janela.");
-                    }
-                }
+                tratarSelecaoImovel();
             }
             
         });
@@ -118,48 +171,11 @@ public class LimiteConPropostas extends JFrame implements ActionListener{
         listPropostas.addListSelectionListener(new ListSelectionListener(){
             @Override
             public void valueChanged(ListSelectionEvent lse) {
-                int indexEscolhido = listPropostas.getSelectedIndex();
-                if(indexEscolhido<=0){
-                    System.out.println("Nenhum item selecionado");
-                }else{
-                    String escolhido = listPropostas.getSelectedValue().toString();  
-                    flagJanela2=escolhido;
-                    String strAux="";
-                    boolean flagProposta=false;
-                    for(Proposta prop: imovelEscolhido.getListaPropostas()){
-                        strAux = "Comprador: "+prop.getComprador().getNome()+" - R$" + prop.getValor();
-                        if(strAux.equals(escolhido)){
-                            propostaEscolhida = prop;
-                            flagProposta = true;
-                            break;
-                        }
-                    }
-                    if(!flagJanela2.equals(flagJanela2Hist) && flagProposta){
-                        flagJanela2Hist = flagJanela2;
-                        new LimiteEscolhaProposta(ctrPrincipal, imovelEscolhido,propostaEscolhida);
-                    }else{
-                        System.out.println("Já foi aberto uma janela ou erro na proposta selecionada.");
-                    }
-                }
+                tratarSelecaoProposta();
             } 
         });
         
-        pEscolhaTipoImovel.add(listImoveis);
-        pListaTipo.add(listPropostas);
-        
-        painelSecundario.add(pEscolhaTipoImovel);
-        painelSecundario.add(pListaTipo);
-        
-        painelPrincipal.add(painelSecundario);
-        
-        super.add(painelPrincipal);
-        
-        super.setTitle("Propostas");
-        super.setSize(700, 400);
-        super.setAlwaysOnTop(true);
-        super.setResizable(false);
-        super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        super.setVisible(true);
+        InformacoesPainel();
     }
 
     @Override
