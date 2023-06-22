@@ -33,9 +33,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author lucas
  */
-public class LimitePrincipal extends JFrame implements WindowListener{
+public class LimitePrincipal extends JFrame implements WindowListener {
     private ControlePrincipal ctrPrincipal;
-    
+
     private JMenuBar barraMenu;
     private JMenu menuCad, menuCon, menuRel, menuImportar;
     private JMenuItem cadastraCorretor, cadastraComprador, cadastraVendedor, cadastraImovel;
@@ -43,9 +43,7 @@ public class LimitePrincipal extends JFrame implements WindowListener{
     private JMenuItem relatoriosItem, importarItem;
     private String caminhoSalvar = "";
 
-    public LimitePrincipal(ControlePrincipal controle){
-        ctrPrincipal = controle;
-        
+    private void CadastrarCorretor() {
         cadastraCorretor = new JMenuItem("Cadastrar Corretor");
         cadastraCorretor.addActionListener(new ActionListener() {
             @Override
@@ -53,7 +51,9 @@ public class LimitePrincipal extends JFrame implements WindowListener{
                 ctrPrincipal.interfaceCadCorretor();
             }
         });
-        
+    }
+
+    private void CadastrarVendedor() {
         cadastraVendedor = new JMenuItem("Cadastrar Vendedor");
         cadastraVendedor.addActionListener(new ActionListener() {
             @Override
@@ -61,7 +61,9 @@ public class LimitePrincipal extends JFrame implements WindowListener{
                 ctrPrincipal.interfaceCadVendedor();
             }
         });
-        
+    }
+
+    private void CadastrarImovel() {
         cadastraImovel = new JMenuItem("Cadastrar Imovel");
         cadastraImovel.addActionListener(new ActionListener() {
             @Override
@@ -69,7 +71,9 @@ public class LimitePrincipal extends JFrame implements WindowListener{
                 ctrPrincipal.interfaceCadImovel();
             }
         });
-        
+    }
+
+    private void CadastrarComprador() {
         cadastraComprador = new JMenuItem("Cadastrar Comprador");
         cadastraComprador.addActionListener(new ActionListener() {
             @Override
@@ -77,7 +81,9 @@ public class LimitePrincipal extends JFrame implements WindowListener{
                 ctrPrincipal.interfaceCadComprador();
             }
         });
-        
+    }
+
+    private void Catalogo() {
         consultaCatalogo = new JMenuItem("Catálogo");
         consultaCatalogo.addActionListener(new ActionListener() {
             @Override
@@ -85,7 +91,9 @@ public class LimitePrincipal extends JFrame implements WindowListener{
                 ctrPrincipal.interfaceConCatalogo();
             }
         });
-        
+    }
+
+    private void Propostas() {
         consultaPropostas = new JMenuItem("Propostas");
         consultaPropostas.addActionListener(new ActionListener() {
             @Override
@@ -93,7 +101,9 @@ public class LimitePrincipal extends JFrame implements WindowListener{
                 ctrPrincipal.interfaceConPropostas();
             }
         });
-        
+    }
+
+    private void InativaImovel() {
         consultaInativaImovel = new JMenuItem("Inativa Imovel");
         consultaInativaImovel.addActionListener(new ActionListener() {
             @Override
@@ -101,38 +111,40 @@ public class LimitePrincipal extends JFrame implements WindowListener{
                 ctrPrincipal.interfaceConImovel();
             }
         });
-        
-        menuCad = new JMenu("Cadastro");
-        menuCon = new JMenu("Consulta");
-        menuRel = new JMenu("Relatórios");
-        menuImportar = new JMenu("Importar");
+    }
 
+    private void GerarRelatorios() {
         relatoriosItem = new JMenuItem("Gerar Relatórios");
-        relatoriosItem.addActionListener(new ActionListener(){
+        relatoriosItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 ctrPrincipal.interfaceRelatorios();
             }
         });
-        
+    }
+
+    private void ImportarImagem() {
         importarItem = new JMenuItem("Importar Imagem");
-        importarItem.addActionListener(new ActionListener(){
+        importarItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caminhoSalvar = JOptionPane.showInputDialog(null, "Digite o caminho até a pasta \"images\" que está na pasta do projeto.\nExemplo: C:\\user\\nome\\Documentos\\NetBeansProjects\\NomeDoProjeto\\images\\\n", "Caminho pasta Images", 1);
-                if(caminhoSalvar!=null){
+                caminhoSalvar = JOptionPane.showInputDialog(null,
+                        "Digite o caminho até a pasta \"images\" que está na pasta do projeto.\nExemplo: C:\\user\\nome\\Documentos\\NetBeansProjects\\NomeDoProjeto\\images\\\n",
+                        "Caminho pasta Images", 1);
+                if (caminhoSalvar != null) {
                     JFileChooser arquivo = new JFileChooser();
                     arquivo.setCurrentDirectory(new File(System.getProperty("user.home")));
-                    FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.imagens", "jpeg", "jpg", "png", "gif");
+                    FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.imagens", "jpeg", "jpg", "png",
+                            "gif");
                     int resultado = arquivo.showSaveDialog(null);
-                    if(resultado == JFileChooser.APPROVE_OPTION){
+                    if (resultado == JFileChooser.APPROVE_OPTION) {
                         File arqSelecionado = arquivo.getSelectedFile();
                         String caminho = arqSelecionado.getAbsolutePath();
                         System.out.println("PATH: " + caminho);
                         System.out.println("Foto: " + arqSelecionado.getName());
-                        try{
+                        try {
                             String inFileName = caminho;
-                            String outFileName = caminhoSalvar+arqSelecionado.getName();
+                            String outFileName = caminhoSalvar + arqSelecionado.getName();
 
                             FileChannel in;
                             FileChannel out;
@@ -140,28 +152,26 @@ public class LimitePrincipal extends JFrame implements WindowListener{
                             FileInputStream input = new FileInputStream(inFileName);
                             FileOutputStream output = new FileOutputStream(outFileName);
 
-
                             in = input.getChannel();
                             out = output.getChannel();
 
-                            in.transferTo(0, in.size(), out);//copiando o arquivo e salvando no diretório que você escolheu
+                            in.transferTo(0, in.size(), out);// copiando o arquivo e salvando no diretório que você
+                                                             // escolheu
 
                             out.close();
                             in.close();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }else if(resultado == JFileChooser.CANCEL_OPTION){
+                    } else if (resultado == JFileChooser.CANCEL_OPTION) {
                         System.out.println("Nenhum arquivo selecionado.");
                     }
                 }
             }
         });
-        
-        //Criar JMenuBar
-        barraMenu = new JMenuBar();
+    }
 
-        //Adicionar componentes ao JMenu
+    private void ComponentesJMenu() {
         menuCad.add(cadastraCorretor);
         menuCad.add(cadastraVendedor);
         menuCad.add(cadastraImovel);
@@ -172,19 +182,21 @@ public class LimitePrincipal extends JFrame implements WindowListener{
         menuCon.add(consultaPropostas);
         menuCon.add(consultaInativaImovel);
         menuCon.add(new JSeparator(JSeparator.HORIZONTAL));
-        
+
         menuRel.add(relatoriosItem);
         menuRel.add(new JSeparator(JSeparator.HORIZONTAL));
-        
+
         menuImportar.add(importarItem);
-        
+
         barraMenu.add(menuCad);
         barraMenu.add(menuCon);
         barraMenu.add(menuRel);
         barraMenu.add(menuImportar);
+    }
 
+    private void InformacoesPainel() {
         super.addWindowListener(this);
-        
+
         super.setTitle("Lobby Principal - ItaHouse");
         super.setJMenuBar(barraMenu);
         super.setSize(600, 400);
@@ -192,44 +204,86 @@ public class LimitePrincipal extends JFrame implements WindowListener{
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         super.setVisible(true);
+    }
+
+    public LimitePrincipal(ControlePrincipal controle) {
+        ctrPrincipal = controle;
+
+        CadastrarCorretor();
+
+        CadastrarVendedor();
+
+        CadastrarImovel();
+
+        CadastrarComprador();
+
+        Catalogo();
+
+        Propostas();
+
+        InativaImovel();
+
+        menuCad = new JMenu("Cadastro");
+        menuCon = new JMenu("Consulta");
+        menuRel = new JMenu("Relatórios");
+        menuImportar = new JMenu("Importar");
+
+        GerarRelatorios();
+
+        ImportarImagem();
+
+        // Criar JMenuBar
+        barraMenu = new JMenuBar();
+
+        // Adicionar componentes ao JMenu
+        ComponentesJMenu();
+
+        InformacoesPainel();
 
     }
 
     @Override
     public void windowOpened(WindowEvent we) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void windowClosing(WindowEvent we) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //serializa todos
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
+        // serializa todos
         ctrPrincipal.serializaDados();
         dispose();
     }
 
     @Override
     public void windowClosed(WindowEvent we) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void windowIconified(WindowEvent we) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void windowDeiconified(WindowEvent we) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void windowActivated(WindowEvent we) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void windowDeactivated(WindowEvent we) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change
+        // body of generated methods, choose Tools | Templates.
     }
 }
