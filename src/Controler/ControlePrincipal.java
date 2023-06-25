@@ -9,6 +9,7 @@ import View.LimiteRelatorios;
 import View.LimiteConImovel;
 import Model.Comprador;
 import Model.Corretor;
+import Model.DetalhesVendedor;
 import Model.Imovel;
 import Model.Proposta;
 import Model.Util;
@@ -36,9 +37,6 @@ import javax.swing.JOptionPane;
  */
 public class ControlePrincipal {
     
-    //limite principal
-    private LimitePrincipal limPrincipal;
-    
     //controladores
     private ControleComprador ctrComprador;
     private ControleVendedor ctrVendedor;
@@ -46,7 +44,7 @@ public class ControlePrincipal {
     private ControleCorretor ctrCorretor;
     
     public ControlePrincipal(){
-        limPrincipal = new LimitePrincipal(this);
+        new LimitePrincipal(this);
         
         ctrComprador = new ControleComprador();
         ctrVendedor = new ControleVendedor();
@@ -62,9 +60,9 @@ public class ControlePrincipal {
         ctrCorretor.cadastraCorretor("1002", "Luiz Souza", "luiz@gmail.com", "999990002", "10002", 40);
         
         //Adiciona Vendedores 
-        ctrVendedor.cadastraVendedor("2001", "Marina Cintra", "marina@gmail.com", "888880001", Util.FONE);
-        ctrVendedor.cadastraVendedor("2002", "Andre Cruz", "andre@gmail.com", "888880002", Util.FONE);
-        ctrVendedor.cadastraVendedor("2003", "Felipe Antunes", "felipe@gmail.com", "888880003", Util.EMAIL);
+        ctrVendedor.cadastraVendedor(new DetalhesVendedor("2001", "Marina Cintra", "marina@gmail.com", "888880001", Util.FONE));
+        ctrVendedor.cadastraVendedor(new DetalhesVendedor("2002", "Andre Cruz", "andre@gmail.com", "888880002", Util.FONE));
+        ctrVendedor.cadastraVendedor(new DetalhesVendedor("2003", "Felipe Antunes", "felipe@gmail.com", "888880003", Util.EMAIL));
         
         //Adiciona Compradores
         ctrComprador.cadastraComprador("3001", "Ana Carvalho", "ana@gmail.com", "777770001", Util.FONE);
@@ -133,7 +131,8 @@ public class ControlePrincipal {
     }
 
     public void cadVendedor(String cpf, String nome, String email, String fone, String contato){
-        ctrVendedor.cadastraVendedor(cpf, nome, email, fone, contato);
+        DetalhesVendedor detalhes = new DetalhesVendedor(cpf, nome, email, fone, Util.FONE);
+        ctrVendedor.cadastraVendedor(detalhes);
     }
     
     public void cadImovel(int codigo, String tipo, String descricao, String endereco, String foto, double preco, double comissao, String cpfVendedor){

@@ -5,6 +5,7 @@
  */
 package Controler;
 
+import Model.DetalhesVendedor;
 import Model.Vendedor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,56 +19,56 @@ import javax.swing.JOptionPane;
  *
  * @author lucas
  */
-public class ControleVendedor implements Serializable{
+public class ControleVendedor implements Serializable {
     private ArrayList<Vendedor> listaVendedor = new ArrayList<Vendedor>();
-    
-    public ControleVendedor(){
+
+    public ControleVendedor() {
         desserializaVendedor();
     }
-    
-    public void cadastraVendedor(String cpf, String nome, String email, String fone,
-                    String contatoPref){
-        Vendedor novoVendedor = new Vendedor(cpf, nome, email,fone,contatoPref);
+
+    public void cadastraVendedor(DetalhesVendedor detalhes) {
+        Vendedor novoVendedor = new Vendedor(detalhes.getCpf(), detalhes.getNome(),
+                detalhes.getEmail(), detalhes.getFone(), detalhes.getContatoPref());
         listaVendedor.add(novoVendedor);
         System.out.println("Cadastrado Vendedor!");
         JOptionPane.showMessageDialog(null, "Vendedor cadastrado!", "Sucesso", 1);
     }
-    
-    public boolean existeVendedor(String cpf){
-        for(Vendedor vendedor: listaVendedor){
-            if(vendedor.getCpf().equals(cpf))
+
+    public boolean existeVendedor(String cpf) {
+        for (Vendedor vendedor : listaVendedor) {
+            if (vendedor.getCpf().equals(cpf))
                 return true;
         }
         return false;
     }
-    
-    public Vendedor retornaVendedorPorCpf(String cpf){
-        for(Vendedor vendedor: listaVendedor){
-            if(vendedor.getCpf().equals(cpf))
+
+    public Vendedor retornaVendedorPorCpf(String cpf) {
+        for (Vendedor vendedor : listaVendedor) {
+            if (vendedor.getCpf().equals(cpf))
                 return vendedor;
         }
         return null;
     }
-    
-    void desserializaVendedor(){
-        //Parada com arquivo
-        try{
+
+    void desserializaVendedor() {
+        // Parada com arquivo
+        try {
             FileInputStream arquivo = new FileInputStream("vendedores.tmp");
             ObjectInputStream leArq = new ObjectInputStream(arquivo);
             listaVendedor = (ArrayList<Vendedor>) leArq.readObject();
             leArq.close();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("Não existe arquivo vendedores");
         }
     }
-    
-    void serializaVendedor(){
-        try{
+
+    void serializaVendedor() {
+        try {
             FileOutputStream arquivo = new FileOutputStream("vendedores.tmp");
             ObjectOutputStream escreveArq = new ObjectOutputStream(arquivo);
             escreveArq.writeObject(listaVendedor);
             escreveArq.close();
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("Erro ao serializar arquivo vendedores.");
         }
     }

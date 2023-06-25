@@ -106,7 +106,6 @@ public class LimiteVisita extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         String strCorretor, strComprador;
         String strDia, strMes, strAno, strHora, strMin;
-        String strValor;
         strCorretor = textCorretor.getText();
         strComprador = textComprador.getText();
         strDia = textDia.getText();
