@@ -35,18 +35,27 @@ public class LimiteConImovel extends JFrame implements ActionListener{
     private JTextField textCodigo;
     private JTextArea resultadoImovel;
     private JButton buttonProcurar, buttonInativo;
+
+    static final int rowsValue1 = 3;
+    static final int rowsValue2 = 1;
+    static final int colsValue = 1;
+
+    static final int columns = 5;
+
+    static final int width = 600;
+    static final int height = 400;
     
     public LimiteConImovel(ControlePrincipal aThis) {
         ctrPrincipal = aThis;
         
-        painelPrincipal = new JPanel(new GridLayout(3,1));
+        painelPrincipal = new JPanel(new GridLayout(rowsValue1,colsValue));
         painelSecundario = new JPanel(new FlowLayout(FlowLayout.CENTER));
         pCodigoImovel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         pButton = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        pResultado = new JPanel(new GridLayout(1,1));
+        pResultado = new JPanel(new GridLayout(rowsValue2,colsValue));
         
         labelCodigo = new JLabel("Código ");
-        textCodigo = new JTextField(5);
+        textCodigo = new JTextField(columns);
         
 
         resultadoImovel = new JTextArea();
@@ -89,7 +98,7 @@ public class LimiteConImovel extends JFrame implements ActionListener{
         super.add(painelPrincipal);
         
         super.setTitle("Inativa Imovel");
-        super.setSize(600, 400);
+        super.setSize(width, height);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
