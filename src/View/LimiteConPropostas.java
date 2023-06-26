@@ -35,6 +35,11 @@ public class LimiteConPropostas extends JFrame implements ActionListener{
     private String flagJanela = "", flagJanelaHist = "", flagJanela2="", flagJanela2Hist="";
     private Imovel imovelEscolhido = null;
     private Proposta propostaEscolhida = null;
+
+    static final int indexInicial = 0;
+
+    static final int width = 700;
+    static final int height = 400;
     
     public LimiteConPropostas(ControlePrincipal controle){
         ctrPrincipal = controle;
@@ -76,7 +81,7 @@ public class LimiteConPropostas extends JFrame implements ActionListener{
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                 int indexEscolhido = listImoveis.getSelectedIndex();
-                if(indexEscolhido<=0){
+                if(indexEscolhido<=indexInicial){
                     System.out.println("Nenhum item selecionado");
                 }else{
                     String escolhido = listImoveis.getSelectedValue().toString(); 
@@ -119,7 +124,7 @@ public class LimiteConPropostas extends JFrame implements ActionListener{
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                 int indexEscolhido = listPropostas.getSelectedIndex();
-                if(indexEscolhido<=0){
+                if(indexEscolhido<=indexInicial){
                     System.out.println("Nenhum item selecionado");
                 }else{
                     String escolhido = listPropostas.getSelectedValue().toString();  
@@ -155,7 +160,7 @@ public class LimiteConPropostas extends JFrame implements ActionListener{
         super.add(painelPrincipal);
         
         super.setTitle("Propostas");
-        super.setSize(700, 400);
+        super.setSize(width, height);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
