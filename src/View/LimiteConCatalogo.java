@@ -36,6 +36,11 @@ public class LimiteConCatalogo extends JFrame implements ActionListener{
     private ArrayList<Imovel> imoveisEscolha;
     private ArrayList<String> listaImoveis = new ArrayList<String>();
     private boolean flagJanela = false;
+
+    static final int indexInicial = 0;
+
+    static final int width = 600;
+    static final int height = 400;
     
     public LimiteConCatalogo(ControlePrincipal controle){
         ctrPrincipal = controle;
@@ -66,7 +71,7 @@ public class LimiteConCatalogo extends JFrame implements ActionListener{
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                 int indexEscolhido = listaDoTipoEscolhido.getSelectedIndex();
-                if(indexEscolhido<=0){
+                if(indexEscolhido <= indexInicial){
                     System.out.println("Nenhum item selecionado");
                 }else{
                     String escolhido = listaDoTipoEscolhido.getSelectedValue().toString();  
@@ -100,7 +105,7 @@ public class LimiteConCatalogo extends JFrame implements ActionListener{
         super.add(painelPrincipal);
         
         super.setTitle("Catálogo");
-        super.setSize(700, 400);
+        super.setSize(width, height);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
