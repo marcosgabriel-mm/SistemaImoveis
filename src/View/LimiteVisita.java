@@ -35,14 +35,26 @@ public class LimiteVisita extends JFrame implements ActionListener{
     private JTextField textComprador, textCorretor, textDia, textMes, textAno, textHora, textMinutos;
     private JButton buttonCadastrar;
     private Imovel imovelEscolhido;
+
+    static final int rowsValue1 = 2;
+    static final int rowsValue2 = 4;
+    static final int colsValue1 = 1;
+    static final int colsValue2 = 1;
+
+    static final int columns1 = 10;
+    static final int columns2 = 2;
+    static final int columns3 = 4;
+
+    static final int width = 600;
+    static final int height = 400;
     
     public LimiteVisita(ControlePrincipal controle, Imovel imovel) {
         ctrPrincipal = controle;
         imovelEscolhido = imovel;
         
         //criação dos paineis
-        painelPrincipal = new JPanel(new GridLayout(2,1));
-        painelSecundario = new JPanel(new GridLayout(4,1));
+        painelPrincipal = new JPanel(new GridLayout(rowsValue1,colsValue1));
+        painelSecundario = new JPanel(new GridLayout(rowsValue2,colsValue2));
         pComprador = new JPanel(new FlowLayout(FlowLayout.CENTER));
         pCorretor = new JPanel(new FlowLayout(FlowLayout.CENTER));
         pData = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -56,13 +68,13 @@ public class LimiteVisita extends JFrame implements ActionListener{
         labelHora = new JLabel("Hora ");
         
         //Criação dos textFields
-        textComprador = new JTextField(10);
-        textCorretor = new JTextField(10);
-        textDia = new JTextField(2);
-        textMes = new JTextField(2);
-        textAno = new JTextField(4);
-        textHora = new JTextField(2);
-        textMinutos = new JTextField(2);
+        textComprador = new JTextField(columns1);
+        textCorretor = new JTextField(columns1);
+        textDia = new JTextField(columns2);
+        textMes = new JTextField(columns2);
+        textAno = new JTextField(columns3);
+        textHora = new JTextField(columns2);
+        textMinutos = new JTextField(columns2);
         
         pCorretor.add(labelCorretor);
         pCorretor.add(textCorretor);
@@ -95,7 +107,7 @@ public class LimiteVisita extends JFrame implements ActionListener{
         super.add(painelPrincipal);
         
         super.setTitle("Realizar Visita");
-        super.setSize(600, 400);
+        super.setSize(width, height);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
