@@ -43,6 +43,9 @@ public class LimitePrincipal extends JFrame implements WindowListener{
     private JMenuItem relatoriosItem, importarItem;
     private String caminhoSalvar = "";
 
+    static final int width = 600;
+    static final int height = 400;
+
     public LimitePrincipal(ControlePrincipal controle){
         ctrPrincipal = controle;
         
@@ -187,7 +190,7 @@ public class LimitePrincipal extends JFrame implements WindowListener{
         
         super.setTitle("Lobby Principal - ItaHouse");
         super.setJMenuBar(barraMenu);
-        super.setSize(600, 400);
+        super.setSize(width, height);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
