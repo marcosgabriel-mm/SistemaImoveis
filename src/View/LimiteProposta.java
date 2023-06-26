@@ -46,7 +46,7 @@ public class LimiteProposta extends JFrame implements ActionListener{
     static final int columns3 = 4;
     static final int columns4 = 8;
 
-    static final int width = 600;
+    static final int width = 650;
     static final int height = 400;
     
     public LimiteProposta(ControlePrincipal controle, Imovel imovel) {
