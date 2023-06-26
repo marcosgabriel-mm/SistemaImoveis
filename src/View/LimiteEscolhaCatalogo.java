@@ -34,6 +34,17 @@ public class LimiteEscolhaCatalogo extends JFrame implements ActionListener{
     private JButton buttonVisita, buttonProposta;
     private JTextArea dadosImovel;
     private ImageIcon imagemImovel;
+
+    static final int rowsValue = 1;
+    static final int colsValue = 2;
+
+    static final int width1 = 300;
+    static final int width2 = 250;
+    static final int width3 = 600;
+    static final int height1 = 186;
+    static final int height2 = 186;
+    static final int height3 = 400;
+    static final int hints = 100;
     
     public LimiteEscolhaCatalogo(ControlePrincipal ctrPrincipal, Imovel auxiliarEscolhido) {
         this.ctrPrincipal = ctrPrincipal;
@@ -41,7 +52,7 @@ public class LimiteEscolhaCatalogo extends JFrame implements ActionListener{
         
         //Criação dos paineis
         painelPrincipal = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        painelSecundario = new JPanel(new GridLayout(1,2));
+        painelSecundario = new JPanel(new GridLayout(rowsValue,colsValue));
         pImagem = new JPanel(new FlowLayout(FlowLayout.LEFT));
         pInformacoes = new JPanel(new FlowLayout(FlowLayout.LEFT));
         pButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -49,13 +60,13 @@ public class LimiteEscolhaCatalogo extends JFrame implements ActionListener{
         //criacao da imagem
         imagemImovel = new ImageIcon(getClass().getResource(imovelEscolha.getArquivoFoto()));
         imagemImovel.setDescription(imovelEscolha.getDescricao());
-        imagemImovel.setImage(imagemImovel.getImage().getScaledInstance(300, 186, 100));
+        imagemImovel.setImage(imagemImovel.getImage().getScaledInstance(width1, height1, hints));
         
         labelImagem = new JLabel(imagemImovel);
         
         String dados = ctrPrincipal.retornaStringDadosImovel(imovelEscolha);
         dadosImovel = new JTextArea(dados);
-        dadosImovel.setSize(250, 186);
+        dadosImovel.setSize(width2, height2);
         dadosImovel.setEditable(false);
         dadosImovel.setLineWrap(true);
         dadosImovel.setWrapStyleWord(true);
@@ -89,7 +100,7 @@ public class LimiteEscolhaCatalogo extends JFrame implements ActionListener{
         String titulo = imovelEscolha.getCodigo()+" - "+ imovelEscolha.getDescricao();
         
         super.setTitle(titulo);
-        super.setSize(600, 400);
+        super.setSize(width3, height3);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
