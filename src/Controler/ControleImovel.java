@@ -459,18 +459,20 @@ public class ControleImovel {
         return visitaString;
     }
     
-    public String retornaPropostasRecebidas(Proposta proposta, Calendar inicio, Calendar fim){
+    public String retornaPropostasRecebidas(Proposta proposta, Calendar inicio, Calendar fim) {
         String propostaString = "";
-        if((proposta.getData().before(fim) && proposta.getData().after(inicio)) ||(fim.equals(proposta.getData()) || inicio.equals(proposta.getData()))){
-            propostaString+="Data: "+proposta.getData().getTime().toString()+
-                    "\nCorretor: "+proposta.getCorretor().getNome()+
-                    "\nComprador: "+proposta.getComprador().getNome()+
-                    "\nValor: "+proposta.getValor()+
-                    "\nEstado: "+proposta.getEstado()+"\n";
+
+        if (isDataInRange(proposta.getData(), inicio, fim)) {
+            propostaString += "Data: " + proposta.getData().getTime().toString() +
+                    "\nCorretor: " + proposta.getCorretor().getNome() +
+                    "\nComprador: " + proposta.getComprador().getNome() +
+                    "\nValor: " + proposta.getValor() +
+                    "\nEstado: " + proposta.getEstado() + "\n";
         }
+
         return propostaString;
     }
-    
+
     public String retornaVisitasCorretorString(Calendar inicio, Calendar fim, String cpfCorretor) {
         String visitasCorretor = "Visitas pelo Corretor:\n";
         
