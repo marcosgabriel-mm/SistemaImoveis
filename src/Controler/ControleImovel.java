@@ -471,19 +471,28 @@ public class ControleImovel {
         return propostaString;
     }
     
-    public String retornaVisitasCorretorString(Calendar inicio, Calendar fim, String cpfCorretor){
+    public String retornaVisitasCorretorString(Calendar inicio, Calendar fim, String cpfCorretor) {
         String visitasCorretor = "Visitas pelo Corretor:\n";
-        for(Imovel im: listaImovel){
-            for(Visita v: im.getListaVisitas()){
-                if((v.getData().before(fim) && v.getData().after(inicio)) ||(fim.equals(v.getData()) || inicio.equals(v.getData()))){
-                    if(v.getCorretor().getCpf().equals(cpfCorretor)){
-                        visitasCorretor+="\nCódigo do Imóvel:"+im.getCodigo()+"\nVisita:\n"+retornaVisitasRecebidas(v, inicio, fim);
-                    }
+        
+        for (Imovel im : listaImovel) {
+            for (Visita v : im.getListaVisitas()) {
+                if (isDataInRange(v.getData(), inicio, fim) && isVisitaDoCorretor(v, cpfCorretor)) {
+                    visitasCorretor += "\nCódigo do Imóvel: " + im.getCodigo() + "\nVisita:\n" + retornaVisitasRecebidas(v, inicio, fim);
                 }
             }
         }
+        
         return visitasCorretor;
     }
+
+    private boolean isDataInRange(Calendar data, Calendar inicio, Calendar fim) {
+        return (data.equals(fim) || data.equals(inicio) || (data.after(inicio) && data.before(fim)));
+    }
+
+    private boolean isVisitaDoCorretor(Visita visita, String cpfCorretor) {
+        return visita.getCorretor().getCpf().equals(cpfCorretor);
+    }
+
     
     public void desserializaImovel(){
         //Parada com arquivo
