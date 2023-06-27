@@ -19,14 +19,42 @@ public class Comprador extends Pessoa implements Serializable{
     }
 
     public void addTipoImovel(String tipoImovel) throws Exception {
-        if ((!tipoImovel.equalsIgnoreCase(Util.CASA))
-                && (!tipoImovel.equalsIgnoreCase(Util.APTO))
-                && (!tipoImovel.equalsIgnoreCase(Util.LOTE))
-                && (!tipoImovel.equalsIgnoreCase(Util.RURAL))) {
+        if ( equalsCASA(tipoImovel) 
+        &&   equalsAPTO(tipoImovel) 
+        &&   equalsLOTE(tipoImovel) 
+        &&  equalsRURAL(tipoImovel) ){
             throw new Exception("Tipo de imóvel inválido");
         } else {
             listaTipoImovelCompra.add(tipoImovel);
         }
+    }
+
+    public boolean equalsRURAL(String parameter){
+        if((!parameter.equalsIgnoreCase(Util.RURAL))){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean equalsLOTE(String parameter){
+        if((!parameter.equalsIgnoreCase(Util.LOTE))){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean equalsAPTO(String parameter){
+        if((!parameter.equalsIgnoreCase(Util.APTO))){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean equalsCASA(String parameter){
+        if((!parameter.equalsIgnoreCase(Util.CASA))){
+            return true;
+        }
+        return false;
     }
 
     public boolean removeTipoImovel(String tipoImovel) throws Exception {
