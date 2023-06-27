@@ -449,13 +449,15 @@ public class ControleImovel {
         return resultado;
     }
     
-    public String retornaVisitasRecebidas(Visita visita, Calendar inicio, Calendar fim){
+    public String retornaVisitasRecebidas(Visita visita, Calendar inicio, Calendar fim) {
         String visitaString = "";
-        if((visita.getData().before(fim) && visita.getData().after(inicio)) ||(fim.equals(visita.getData()) || inicio.equals(visita.getData()))){
-            visitaString+="Data: "+visita.getData().getTime().toString()+
-                    "\nCorretor: "+visita.getCorretor().getNome()+
-                    "\nComprador: "+visita.getComprador().getNome()+"\n";
+
+        if (isDataInRange(visita.getData(), inicio, fim)) {
+            visitaString += "Data: " + visita.getData().getTime().toString() +
+                    "\nCorretor: " + visita.getCorretor().getNome() +
+                    "\nComprador: " + visita.getComprador().getNome() + "\n";
         }
+
         return visitaString;
     }
     
