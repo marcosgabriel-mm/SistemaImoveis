@@ -30,7 +30,19 @@ public class LimiteCadImovel extends JFrame implements ActionListener{
     
     public LimiteCadImovel(ControlePrincipal controle){
         ctrPrincipal = controle;
+    
+        final int width = 600;
+        final int heigh = 800;
         
+        final int TAMANHO_CODIGO = 10;
+        final int TAMANHO_TIPO = 10;
+        final int TAMANHO_DESCRICAO = 10;
+        final int TAMANHO_ENDERECO = 10;
+        final int TAMANHO_FOTO = 2;
+        final int TAMANHO_PRECO = 5;
+        final int TAMANHO_COMISSAO = 5;
+        final int TAMANHO_VENDEDOR = 10;
+    
         //Criação dos paineis
         painelPrincipal = new JPanel(new FlowLayout(FlowLayout.CENTER));
         painelSecundario = new JPanel(new GridLayout(0,1));
@@ -51,14 +63,14 @@ public class LimiteCadImovel extends JFrame implements ActionListener{
         labelVendedor = new JLabel("   Cpf-Vendedor");
         
         //Criação dos TextFields
-        textCodigo = new JTextField(10);
-        textTipo = new JTextField(10);
-        textDescricao = new JTextField(10);
-        textEndereco = new JTextField(10);
-        textFoto = new JTextField(2);
-        textPreco = new JTextField(5);
-        textComissao = new JTextField(5);
-        textVendedor = new JTextField(10);
+        textCodigo = new JTextField(TAMANHO_CODIGO);
+        textTipo = new JTextField(TAMANHO_TIPO);
+        textDescricao = new JTextField(TAMANHO_DESCRICAO);
+        textEndereco = new JTextField(TAMANHO_ENDERECO);
+        textFoto = new JTextField(TAMANHO_FOTO);
+        textPreco = new JTextField(TAMANHO_PRECO);
+        textComissao = new JTextField(TAMANHO_COMISSAO);
+        textVendedor = new JTextField(TAMANHO_VENDEDOR);
         
         //Criação do Botão
         buttonCadastrar = new JButton("Cadastrar");
@@ -97,7 +109,7 @@ public class LimiteCadImovel extends JFrame implements ActionListener{
         super.add(painelPrincipal);
         
         super.setTitle("Cadastra Imovel");
-        super.setSize(600, 400);
+        super.setSize(width, heigh);
         super.setAlwaysOnTop(true);
         super.setResizable(false);
         super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
